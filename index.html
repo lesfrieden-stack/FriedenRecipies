@@ -1354,10 +1354,14 @@
         <form id="login-form">
             <div class="form-group" style="text-align: left;">
                 <label for="login-select-chef">Choose Existing Chef</label>
-                <select id="login-select-chef" class="form-control">
-                    <option value="">-- Select --</option>
-                    <option value="Deborah Frieden">Deborah Frieden</option>
-                </select>
+                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                    <select id="login-select-chef" class="form-control" style="flex: 1;">
+                        <option value="">-- Select --</option>
+                        <option value="Deborah Frieden">Deborah Frieden</option>
+                    </select>
+                    <button type="button" id="edit-selected-chef-btn" class="btn btn-secondary btn-sm" style="padding: 0.5rem; font-size: 0.9rem;" title="Rename Selected Chef">✏️</button>
+                    <button type="button" id="delete-selected-chef-btn" class="btn btn-secondary btn-sm" style="padding: 0.5rem; font-size: 0.9rem; background-color: #8b0000;" title="Delete Selected Chef">🗑️</button>
+                </div>
             </div>
             <div class="chef-or-divider">Or</div>
             <div class="form-group" style="text-align: left;">
@@ -13128,6 +13132,8 @@
         loginModal: document.getElementById('login-modal-overlay'),
         loginForm: document.getElementById('login-form'),
         loginSelectChef: document.getElementById('login-select-chef'),
+        editSelectedChefBtn: document.getElementById('edit-selected-chef-btn'),
+        deleteSelectedChefBtn: document.getElementById('delete-selected-chef-btn'),
         loginNewChef: document.getElementById('login-new-chef'),
         
         chefIndicator: document.getElementById('chef-indicator'),
@@ -13751,6 +13757,115 @@
         elements.chefFilter.addEventListener('change', renderRecipeGrid);
         elements.categoryFilter.addEventListener('change', renderRecipeGrid);
         elements.mealTypeFilter.addEventListener('change', renderRecipeGrid);
+
+        // Rename Selected Chef
+        elements.editSelectedChefBtn.addEventListener('click', async () => {
+            const selected = elements.loginSelectChef.value;
+            if (!selected) {
+                showToast("Please select a chef to rename");
+                return;
+            }
+            if (selected === "Deborah Frieden") {
+                showToast("Cannot rename the default chef Deborah Frieden");
+                return;
+            }
+
+            const newName = prompt(`Rename chef "${selected}" to:`, selected);
+            if (!newName) return;
+            const trimmedNewName = newName.trim();
+            if (!trimmedNewName || trimmedNewName === selected) return;
+
+            // Update known chefs list
+            let knownChefs = JSON.parse(localStorage.getItem('known-chefs') || '[]');
+            if (Array.isArray(knownChefs)) {
+                knownChefs = knownChefs.map(c => c === selected ? trimmedNewName : c);
+                localStorage.setItem('known-chefs', JSON.stringify(knownChefs));
+            }
+
+            // Update in custom recipes
+            customRecipes.forEach(r => {
+                if (r.Chef === selected) r.Chef = trimmedNewName;
+                if (r.chef === selected) r.chef = trimmedNewName;
+            });
+            localStorage.setItem('custom-recipes', JSON.stringify(customRecipes));
+
+            // Update in events
+            events.forEach(e => {
+                if (e.chef === selected) e.chef = trimmedNewName;
+                if (e.Chef === selected) e.Chef = trimmedNewName;
+            });
+            localStorage.setItem('custom-events', JSON.stringify(events));
+
+            // If it's the current logged in chef, update current logged in state
+            if (currentChef === selected) {
+                currentChef = trimmedNewName;
+                localStorage.setItem('current-chef', currentChef);
+                showChefIndicator(currentChef);
+            }
+
+            localLastUpdated = Date.now();
+            localStorage.setItem('recipes-last-updated', localLastUpdated.toString());
+
+            showToast(`Chef renamed to "${trimmedNewName}" successfully!`);
+            combineAndRenderRecipes();
+            
+            // Sync all changes to cloud
+            await uploadAllToCloud();
+        });
+
+        // Delete Selected Chef
+        elements.deleteSelectedChefBtn.addEventListener('click', async () => {
+            const selected = elements.loginSelectChef.value;
+            if (!selected) {
+                showToast("Please select a chef to delete");
+                return;
+            }
+            if (selected === "Deborah Frieden") {
+                showToast("Cannot delete the default chef Deborah Frieden");
+                return;
+            }
+
+            if (!confirm(`Are you sure you want to delete Chef "${selected}"? Recipes and events by this chef will be reassigned to "Deborah Frieden".`)) {
+                return;
+            }
+
+            // Remove from known chefs
+            let knownChefs = JSON.parse(localStorage.getItem('known-chefs') || '[]');
+            if (Array.isArray(knownChefs)) {
+                knownChefs = knownChefs.filter(c => c !== selected);
+                localStorage.setItem('known-chefs', JSON.stringify(knownChefs));
+            }
+
+            // Reassign custom recipes
+            customRecipes.forEach(r => {
+                if (r.Chef === selected) r.Chef = "Deborah Frieden";
+                if (r.chef === selected) r.chef = "Deborah Frieden";
+            });
+            localStorage.setItem('custom-recipes', JSON.stringify(customRecipes));
+
+            // Reassign events
+            events.forEach(e => {
+                if (e.chef === selected) e.chef = "Deborah Frieden";
+                if (e.Chef === selected) e.Chef = "Deborah Frieden";
+            });
+            localStorage.setItem('custom-events', JSON.stringify(events));
+
+            // If it was the current chef, log out or switch to Deborah Frieden
+            if (currentChef === selected) {
+                currentChef = "Deborah Frieden";
+                localStorage.setItem('current-chef', currentChef);
+                showChefIndicator(currentChef);
+            }
+
+            localLastUpdated = Date.now();
+            localStorage.setItem('recipes-last-updated', localLastUpdated.toString());
+
+            showToast(`Chef "${selected}" deleted successfully!`);
+            combineAndRenderRecipes();
+
+            // Sync all changes to cloud
+            await uploadAllToCloud();
+        });
 
         // Login Submit
         elements.loginForm.addEventListener('submit', async (e) => {

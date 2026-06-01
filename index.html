@@ -1,4 +1,4 @@
-﻿?<!DOCTYPE html>
+?<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1303,6 +1303,8 @@
                 <label for="mealtype-filter">Meal Type</label>
                 <select id="mealtype-filter" class="form-control">
                     <option value="">All Meal Types</option>
+                    <option value="Breakfast">Breakfast</option>
+                    <option value="Lunch">Lunch</option>
                     <option value="Dinner">Dinner</option>
                     <option value="Brunch">Brunch</option>
                     <option value="Dinner Party">Dinner Party</option>
@@ -1448,6 +1450,7 @@
                         <option value="Jams">Jams</option>
                         <option value="Meats">Meats</option>
                         <option value="Pasta">Pasta</option>
+                        <option value="Possible Recipies">Possible Recipies</option>
                         <option value="Poultry">Poultry</option>
                         <option value="Salad">Salad</option>
                         <option value="Sandwiches">Sandwiches</option>
@@ -1460,6 +1463,8 @@
                 <div class="form-group">
                     <label for="form-mealtype">Meal Type *</label>
                     <select id="form-mealtype" class="form-control" required>
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
                         <option value="Dinner">Dinner</option>
                         <option value="Brunch">Brunch</option>
                         <option value="Dinner Party">Dinner Party</option>
@@ -13323,7 +13328,11 @@
     function getMealTypeFromCategory(category) {
         if (!category) return "Dinner";
         const cat = category.toLowerCase();
-        if (cat.includes('breakfast') || cat.includes('bread') || cat.includes('jam')) {
+        if (cat.includes('breakfast')) {
+            return "Breakfast";
+        } else if (cat.includes('lunch') || cat.includes('sandwich')) {
+            return "Lunch";
+        } else if (cat.includes('bread') || cat.includes('jam')) {
             return "Brunch";
         } else if (cat.includes('appetizer') || cat.includes('drink')) {
             return "Cocktail Party";
@@ -13397,8 +13406,8 @@
             });
         }
         
-        const categories = new Set();
-        const mealTypes = new Set(["Dinner", "Brunch", "Dinner Party", "Cocktail Party"]);
+        const categories = new Set(["Possible Recipies"]);
+        const mealTypes = new Set(["Breakfast", "Lunch", "Dinner", "Brunch", "Dinner Party", "Cocktail Party"]);
         
         recipes.forEach(r => {
             const chef = r.Chef || r.chef;

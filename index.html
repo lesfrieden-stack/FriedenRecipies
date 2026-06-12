@@ -1,9 +1,9 @@
-﻿?<!DOCTYPE html>
+?<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frieden Family Recipies</title>
+    <title>Frieden Family Recipes</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -778,6 +778,12 @@
             flex-direction: column;
             gap: 0.8rem;
             margin-top: 0.5rem;
+            height: 3in;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.8rem;
+            background-color: var(--bg-color);
         }
 
         .instruction-input-row {
@@ -824,6 +830,13 @@
             width: 100%;
             margin-top: 0.5rem;
             border: 1px solid var(--border-color);
+        }
+
+        #form-description {
+            resize: none;
+            overflow-y: hidden;
+            min-height: 80px;
+            transition: none;
         }
 
         .form-actions-footer {
@@ -1254,7 +1267,7 @@
 <div class="app-container">
     <header>
         <div class="logo-section">
-            <h1>Frieden Family Recipies</h1>
+            <h1>Frieden Family Recipes</h1>
             <p>Gather & Cook</p>
         </div>
         <div class="header-controls">
@@ -1382,8 +1395,14 @@
 
         <div class="recipe-details-body">
             <div class="recipe-details-title-section">
-                <h2 id="detail-title" class="recipe-details-title">Recipe Title</h2>
-                <div class="recipe-details-subtitle-meta">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap;">
+                    <h2 id="detail-title" class="recipe-details-title" style="margin: 0; flex: 1;">Recipe Title</h2>
+                    <div style="display: flex; gap: 0.5rem; flex-shrink: 0; margin-top: 0.3rem;">
+                        <button id="detail-edit-btn" class="btn btn-secondary btn-sm" style="display: none; font-size: 0.9rem; padding: 0.4rem 0.8rem;">✏️ Edit</button>
+                        <button id="detail-delete-btn" class="btn btn-danger btn-sm" style="display: none; font-size: 0.9rem; padding: 0.4rem 0.8rem;">🗑️ Delete</button>
+                    </div>
+                </div>
+                <div class="recipe-details-subtitle-meta" style="margin-top: 1rem;">
                     <span>Chef: <strong id="detail-chef">Chef Name</strong></span>
                     <span>Category: <strong id="detail-category">Category</strong></span>
                     <span>Meal Type: <strong id="detail-mealtype">Meal Type</strong></span>
@@ -1408,11 +1427,7 @@
                 </div>
             </div>
         </div>
-        <div class="recipe-action-footer">
-            <div style="display: flex; gap: 1rem;">
-                <button id="detail-delete-btn" class="btn btn-danger" style="display: none;">Delete Recipe</button>
-                <button id="detail-edit-btn" class="btn btn-secondary" style="display: none;">✏️ Edit Recipe</button>
-            </div>
+        <div class="recipe-action-footer" style="justify-content: flex-end;">
             <div style="display: flex; gap: 1rem;">
                 <button id="detail-share-btn" class="btn btn-secondary">🔗 Share Recipe Link</button>
                 <button class="btn btn-secondary" onclick="closeModal('detail-modal-overlay')">Close</button>
@@ -1450,7 +1465,7 @@
                         <option value="Jams">Jams</option>
                         <option value="Meats">Meats</option>
                         <option value="Pasta">Pasta</option>
-                        <option value="Possible Recipies">Possible Recipies</option>
+                        <option value="Possible Recipes">Possible Recipes</option>
                         <option value="Poultry">Poultry</option>
                         <option value="Salad">Salad</option>
                         <option value="Sandwiches">Sandwiches</option>
@@ -1458,7 +1473,9 @@
                         <option value="Seafood">Seafood</option>
                         <option value="Soups">Soups</option>
                         <option value="Vegetables">Vegetables</option>
+                        <option value="custom">＋ Add Custom Category...</option>
                     </select>
+                    <input type="text" id="form-custom-category" class="form-control" placeholder="Enter Custom Category" style="display: none; margin-top: 0.5rem;">
                 </div>
                 <div class="form-group">
                     <label for="form-mealtype">Meal Type *</label>
@@ -1668,7 +1685,7 @@
 {
         "Chef":  "Deborah",
         "Title":  "Brandied Fruit Scones",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "A great batch of scones requires only a few ingredients, but fast hands are essential for working the flour, cold butter and cream into a firm, substantial dough. \u003ca href=\"https://cooking.nytimes.com/recipes/1021676-brandied-dried-fruit\"\u003eBrandied dried fruit\u003c/a\u003e is added to this traditional dough, and the result is a holiday treat that carries notes of warming spices and citrus. The dough can be cut and baked immediately, or stored in the freezer and baked to order. Brush with heavy cream and sprinkle with sugar before they go into the oven, and you’ll have a batch of scones with perfect crackly tops. These are best served warm with a generous slather of salted butter and a dot of piquant marmalade, but they’ll keep for a day or two if stored in an airtight container at room temperature.",
         "Ingredients":  [
                             {
@@ -1713,7 +1730,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "HÃ´tel Les Deux Gares Paris 4 Ã©toiles | SITE OFFICIEL | CafÃ© Les Deux Gares",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -1727,7 +1744,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Favorite Paris Restaurants - David Lebovitz Newsletter",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -1741,7 +1758,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Mini Carrot Cakes",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "These impressive mini carrot cakes with coconut buttercream look like they\u0027re from a restaurant, but they\u0027re actually so easy to make at home.",
         "Ingredients":  [
                             {
@@ -1858,7 +1875,7 @@
     {
         "Chef":  "Deborah",
         "Title":  ". x X    Septime La Cave    X x .",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -1872,7 +1889,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Confetti Cabbage Slaw with Peanut-Lime Dressing",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This vibrant multi-colored slaw is smothered with an amazing peanut and lime dressing. Slideshow: More Slaw Recipes",
         "Ingredients":  [
                             {
@@ -1941,7 +1958,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Bee Sting Cake (Bienenstich)",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Bienenstich, or bee sting cake, is a German yeasted cake kissed with honey. A creamy filling and crunchy almond topping make this recipe irresistible.",
         "Ingredients":  [
                             {
@@ -2038,7 +2055,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Instagram",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -2052,7 +2069,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Devil’s Food Cake With Hazelnut Praline",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "The best thing about chocolate cake is that it doesn’t really need a specific season or, arguably, a specific reason to be made. The malted cream and hazelnut praline make this cake what you could call “pure joy” in dessert form. You’ll make more smooth praline than you need; keep any extra in a jar in the fridge to spread onto toast, or to mix with cocoa powder for a Nutella-esque experience. You surely won’t regret it.",
         "Ingredients":  [
                             {
@@ -2141,7 +2158,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Spicy Lemongrass Blender Marinade",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This versatile marinade is made with lemongrass, chile-garlic sauce, fresh ginger, shallots, and lime juice.",
         "Ingredients":  [
                             {
@@ -2182,7 +2199,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "TAPISSERIE",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -2196,7 +2213,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Fulgurances restaurant",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -2210,7 +2227,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "BUNTAN | FRUITS | PRODUCTS | KOCHI FRESH",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -2224,7 +2241,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "IN2IT Company",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -2238,7 +2255,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Caponata",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Caponata is a Sicilian sweet and sour version of ratatouille. Because eggplant absorbs flavors like a sponge, it’s particularly good in such a pungent dish. Like most eggplant dishes, this gets better overnight. It’s meant to be served at room temperature, and I like it cold as well. It makes a great topping for bruschetta.",
         "Ingredients":  [
                             {
@@ -2303,7 +2320,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Sho Nuff Noodles (Spicy Lo Mein with Pickled Greens, Bok Choy and Cabbage)",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Laced with oyster sauce, ginger, yuzu kosho, and pickled mustard greens, this recipe from chef Marcus Samuelsson, is a medley of sweet, tangy, spicy, and sour.",
         "Ingredients":  [
                             {
@@ -2384,7 +2401,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Recipe: Meringue Softies \u0026mdash; CIAO SAMIN",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -2398,7 +2415,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Introducing the Substack app",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -2412,7 +2429,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Pesto Trapanese Recipe (Pesto alla Siciliano)",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This tasty Pesto Trapanese Recipe of blended roasted tomatoes, cheese, herbs, and almonds makes the most amazing sauce for pasta.",
         "Ingredients":  [
                             {
@@ -2465,7 +2482,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Hector Guimard: Art Nouveau Pioneer in Paris | Bonjour Paris",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -2479,7 +2496,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Laundromat - New York \u0026#8211; Fulgurances",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -2493,7 +2510,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "How to Make a Frittata",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -2507,7 +2524,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Blé Vert Grillé – Freekeh \u0026ndash; Terroirs du Liban - EU",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -2521,7 +2538,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "French Buttercream",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Silky, creamy, and unapologetically luxurious, French buttercream is the frosting to choose when you want something truly celebratory to finish a cake or fill delicate macarons. Whereas Swiss and Italian buttercreams are made exclusively with egg whites, French buttercream is made with egg yolks, yielding a richer frosting with a golden hue. To make it, whipped egg yolks are gently cooked by streaming in a hot sugar syrup to create an exceptionally smooth, sturdy buttercream. We like to flavor it with a splash of vanilla bean paste (those lovely specks!), but you can also use this French buttercream recipe as a base and make chocolate, citrus, or other fruit-flavored variations; see “tips,” below for details.",
         "Ingredients":  [
                             {
@@ -2558,7 +2575,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Instagram",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -2572,7 +2589,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Bernadette, le restaurant de galettes locales et originales made in Paris",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -2586,7 +2603,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "FANY GERSON",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -2600,7 +2617,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Thumbprint Cookies",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "These cookies are crisp, buttery, nut-studded, and can cradle all kinds of imaginative fillings in the depression in their tops. You can fill them with festively colored icings for the Fourth of July, or reach for the jam at holiday time. Other delectable choices include soft caramel, or melted chocolate. Find all those three-quarters-empty jam jars on the refrigerator door, and put them to good use. Oh, and did we mention a simple dab of honey-sweetened peanut butter?",
         "Ingredients":  [
                             {
@@ -2653,7 +2670,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Peach Ricotta Cake",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Peaches are one of the very best things about summer, and this cake celebrates them two ways, with chopped pieces folded into the batter and wedges fanned out to decorate the top. The batter is enriched with ricotta for moisture and a generous amount of lemon zest for brightness. This cake is beautiful enough to serve at a party and can be prepared and baked in less than an hour. If fresh peaches aren\u0027t looking good at your market, you can substitute the same weight of any other fresh stone fruit. (If summer fruit isn\u0027t available, you can even use a 12-ounce package of frozen sliced peaches; just be sure to thaw the slices fully and pat them dry before adding them to the batter.)",
         "Ingredients":  [
                             {
@@ -2710,7 +2727,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Thai One-Pot",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Ground pork, rice, bell peppers, and shiitake mushrooms are cooked in a single pan and flavored with soy sauce, lime juice, and cayenne. Quick, delici...",
         "Ingredients":  [
                             {
@@ -2779,7 +2796,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Le relais de l\u0026#039;entrecote | Le relais de l\u0026#039;entrecote",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -2793,7 +2810,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Spicy Apple Cider Margarita",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This delicious margarita, with apple cider, brandy, tequila, lime juice, and hot honey, is perfect for warm autumn days and cool crisp nights.",
         "Ingredients":  [
                             {
@@ -2842,7 +2859,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Instagram",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -2856,7 +2873,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Basil Chicken Stir-Fry",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "A savory, spicy explosion of flavor that takes less than 30 minutes to make. Plus, a game-changing technique to make lean ground meat juicy and tender.",
         "Ingredients":  [
                             {
@@ -2913,7 +2930,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Favorite Paris Restaurants - David Lebovitz Newsletter",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -2927,7 +2944,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Best Gazpacho",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "More of a drink than a soup, served in frosted glasses or chilled tumblers, gazpacho is perfect when it is too hot to eat but you need cold, salt and lunch all at the same time. Gazpacho is everywhere in Seville, Spain, where this recipe comes from, but it\u0027s not the watered-down salsa or grainy vegetable purée often served in the United States. This version has no bread and is a creamy orange-pink rather than a lipstick red. That is because a large quantity of olive oil is required for making delicious gazpacho, rather than take-it-or-leave it gazpacho. The emulsion of red tomato juice, palest green cucumber juice and golden olive oil produces the right color and a smooth, almost fluffy texture.",
         "Ingredients":  [
                             {
@@ -2972,7 +2989,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Za\u0027atar Baked Eggs",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Top Chef judge Gail Simmons’s Za’atar Baked Eggs get a tangy flavor boost from spiced cucumber yogurt sauce. Find the recipe at Food \u0026 Wine.",
         "Ingredients":  [
                             {
@@ -3041,7 +3058,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Simplest Chicken-and-Leek Stew",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Before cooking the chicken for his lovely stew, Jamie Oliver lightly coats the pieces in flour. Not only does that help the meat brown, it also thicke...",
         "Ingredients":  [
                             {
@@ -3094,7 +3111,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Crispy Cheesy Pan Pizza",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "\u003cp\u003e\u003cimg alt=\"King Arthur 2020 Recipe of the Year\" src=\"/sites/default/files/2020-12/recipe-of-the-year-badge.png\" style=\"float: right; max-width: 120px; margin: 6px 0 8px 12px;\" /\u003e\u003c/p\u003e\n\n\u003cp\u003eOut of all the styles of pizza, we’ve chosen Crispy Cheesy Pan Pizza as our \u003ca href=\"https://www.kingarthurbaking.com/blog/2019/12/31/introducing-our-2020-recipe-of-the-year\"\u003e\u003cstrong\u003e2020 Recipe of the Year\u003c/strong\u003e\u003c/a\u003e. With its crispy golden edges, gooey layer of cheese (right to the edge!), and thick yet delicate crust, it has a texture and taste that make you want more. Plus, the crust has just five simple ingredients: it’s easy to pull off in a home kitchen.\u003cbr /\u003e\n \u003cbr /\u003e\nOur recipe incorporates four baking “tricks.” An untraditional, nearly no-knead method of folding the dough creates airy pockets in the crust. An overnight refrigerated rest allows the dough time to develop maximum flavor. Baking in a cast iron pan makes an audibly crispy crust for your flavorful assortment of toppings. And finally, the unique layering of cheese beneath the sauce acts as a barrier to minimize sogginess.\u003c/p\u003e",
         "Ingredients":  [
                             {
@@ -3139,7 +3156,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Chicken Milanese",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Chicken Milanese is a simple dish that makes chicken breasts seem positively lavish. Similar to Italian \u003ca href=\"https://cooking.nytimes.com/recipes/8936-veal-milanese\"\u003eveal Milanese\u003c/a\u003e, this classic dish pairs hot and crispy breaded chicken with a cool and lemony salad. The recipe takes a little preparation, but the execution is easy: Pound lean chicken breasts until thin, bread them, then pan-fry until the bread crumbs are golden; the crust ensures that the chicken stays moist. While not traditional, this version adds onion powder, garlic powder and grated Parmesan to the breading. Experiment by adding spices, nuts and seeds to the bread crumbs, and cooked or raw fruits and vegetables to the greens. A swipe of mayonnaise on the plate? Unnecessary but sublime.",
         "Ingredients":  [
                             {
@@ -3200,7 +3217,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Paris in the Movies: Which Film Best Evokes the City of Light? | Bonjour Paris",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -3214,7 +3231,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Pear-Ginger Shrub",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Shrubs are a great non-alcoholic alternative to a cocktail! They\u0027re sweet and sour and have a ton of flavors that make them great on their own. This pear-ginger shrub is particularly invigorating served with club soda or tonic water.",
         "Ingredients":  [
                             {
@@ -3247,7 +3264,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Poulet au Vinaigre (Chicken in Vinegar Sauce)",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This modern French chicken dish gets flavor from red wine vinegar and a little bit of butter. Get the recipe at Food \u0026 Wine.",
         "Ingredients":  [
                             {
@@ -3296,7 +3313,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "How to Make XO Sauce",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "XO sauce is made from dried shrimp \u0026 scallops, salty Jinhua ham, shallots, garlic, chili, and oil. Originating in Hong Kong, XO sauce is epically delicious and an explosion of umami!",
         "Ingredients":  [
                             {
@@ -3365,7 +3382,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Accueil - Au Bougnat",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -3379,7 +3396,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Earl Grey Tea and Tonic",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Don\u0027t drink or trying to drink less? A rich tea syrup is a great way to add flavor and body to a non-alcoholic drink, like in this citrusy Earl Grey Tea and Tonic mocktail.",
         "Ingredients":  [
                             {
@@ -3428,7 +3445,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "summer pea salad with unexpected dressing \u0026#8211; smitten kitchen",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -3442,7 +3459,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Welcome on the website of the restaurant Polidor",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -3456,7 +3473,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Carrot Cake",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Incredibly moist, extra flavorful, and easy to make, there’s so much to love about this carrot cake.",
         "Ingredients":  [
                             {
@@ -3565,7 +3582,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Louisiana Sunburst Salad",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This is a recipe for Louisiana Sunburst Salad. A beautiful salad made famous by the Palace Cafe in New Orleans. There\u0026#x27;s a lot of special flavors in this salad, but the port poached cranberries are a stand out.Â",
         "Ingredients":  [
                             {
@@ -3634,7 +3651,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Spicy Mango Pork with Noodles",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This Tempered Mango with Pork and Rice Noodles recipe gets its flavor from ginger, lime, and cumin. Get the recipe from Food \u0026 Wine.",
         "Ingredients":  [
                             {
@@ -3707,7 +3724,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Sorrel Mousse with Lemon Cream",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "When he was working as a caterer, Patrick O\u0027Connell would often study the cookbooks at his local library during his downtime. He discovered his affini...",
         "Ingredients":  [
                             {
@@ -3756,7 +3773,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Restaurant Astier Paris 11",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -3770,7 +3787,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Cranberry Bourbon Smash",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This Cranberry Bourbon Smash is a festive mix of tart cranberries, mint, and smooth bourbon—perfect for cozy holiday sipping.",
         "Ingredients":  [
                             {
@@ -3811,7 +3828,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Comments - Favorite Paris Restaurants",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -3825,7 +3842,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Lemon, Lime, and Bitters",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This refreshing lemon, lime, and bitters recipe gets its spicy kick with a dash of Angostura bitters, keeping it low-alcohol and very refreshing for summer.",
         "Ingredients":  [
                             {
@@ -3858,7 +3875,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Gougeres",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Adapted from Drinking FrenchThree things to keep in mind when making these. One is that you should have all the ingredients ready to go before you start. Don’t let the water and butter boil away while you grate the cheese or you’ll lose too much of the water. Second, let the batter cool for a few minutes before adding the eggs so you don’t ‘cook’ them. When you stir in the eggs that you do it vigorously, and without stopping. I’m not a fan of extra dishes to wash, but a stand mixer is the best way to mix the eggs in quickly. And third, because these are unabashedly loaded with cheese, they won\u0027t rise as high as regular cream puffs, but they will get nice and crispy. Just don\u0027t expect them to rise to the same heights as standard choux puffs. Use a strong cheese, such as Gruyere, Comté, Mimolette, sharp cheddar, or a mix of cheeses. You can also add some smoked cheese or a bit of Parmesan to the mix. If you don’t have a pastry bag with a plain tip, you can put the dough into a freezer bag, snip off a corner, and use that. Or simply use a spring-loaded ice cream scoop or two tablespoons to portion and drop the dough onto the baking sheet.",
         "Ingredients":  [
                             {
@@ -3899,7 +3916,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Delfina\u0026#039;s Secret Pork Sugo Recipe \u0026middot; i am a food blog i am a food blog",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -3913,7 +3930,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Cherry and Smoke (Alcohol-Free Drink)",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "In this alcohol-free cocktail, the campfire smokiness of the Lapsang Souchong, (which is brewed strong, so that the tannins intensify), is such a good counterpoint to the sweet, tart stone fruit.",
         "Ingredients":  [
                             {
@@ -3942,7 +3959,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "The Lebanese “Meza”, a Festive Gastronomy - MOOVTOO",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -3956,7 +3973,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Blackitch Artisan Kitchen - Chef\u0027s Table style",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -3970,7 +3987,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "18 Best Ice Cream Recipes",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -3984,7 +4001,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Black Tea and Whiskey Cooler",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Florida A\u0026M, or FAMU, the historically Black college and university founded in 1887 in Tallahassee, canceled its homecoming celebrations for 2020 because of the Covid-19 pandemic. This whiskey cooler from Shameeka Ayers, an alumna, is Florida sunshine beamed into a glass. The orange and green are inspired by FAMU\u0027s colors; Ms. Ayers calls the drink the Three Strike,  inspired by the school\u0027s “Strike, Strike and Strike Again” chant. The black tea adds depth and is refreshing year-round. The Uncle Nearest whiskey honors Nathan \"Nearest\" Green, the enslaved African who taught Jack Daniels how to distill.",
         "Ingredients":  [
                             {
@@ -4025,7 +4042,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Payroll Taxes in France | Boundless",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -4039,7 +4056,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Duck with Miso-Almond Butter",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "After experimenting with miso paste and flavorful Spanish marcona almonds, Stephanie Izard created a delectable nutty-sweet butter that she serves with meaty seared duck breasts.Bios and Recipes from Top Chef \u0026raquo;",
         "Ingredients":  [
                             {
@@ -4088,7 +4105,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Giant Cardamom Bun",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Turn your kitchen into a Swedish bakery with this oversized take on the classic cardamom bun known as kardemummabulle.",
         "Ingredients":  [
                             {
@@ -4177,7 +4194,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Cranberry Brie Bites",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Puff pastry, brie, and cranberry sauce come together to form an elegant and irresistible party appetizer. The bite-sized snacks will disappear in seconds!",
         "Ingredients":  [
                             {
@@ -4230,7 +4247,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Classic French crèpe recipe, and a free history lesson | Bonjour Paris",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -4244,7 +4261,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Peach Semifreddo With Raspberry Sauce",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -4258,7 +4275,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Oat shortcakes with honey-roasted apricots and almond cream",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "These buttery oat shortcakes are crisp on the outside, tender within and just rustic enough to feel inviting. Filled with honey-roasted apricots and a fragrant almond cream, they make a fabulous pudding; berries macerated with sugar and a splash of orange juice or Cointreau would also be delicious",
         "Ingredients":  [
                             {
@@ -4351,7 +4368,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Torrone Semifreddo",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Torrone is an Italian nougat made with honey, egg whites, sugar and nuts. It can be soft and chewy or hard and crunchy. The recipe here calls for folding crunchy store-bought nougat into whipped cream and honey, then freezing the mixture. What emerges is an utterly delicious, wonderfully simple ice cream\u0026ndash;like dessert. More Semifreddo Recipes",
         "Ingredients":  [
                             {
@@ -4380,7 +4397,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "When Tipping Was Considered Deeply Un-American : The Salt : NPR",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -4394,7 +4411,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "3-Ingredient Mocktail Recipe",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -4408,7 +4425,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "How to Make Smoked Salmon That\u0027s Way Better Than Store-Bought",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "The basic method for hot-smoked salmon is simple: Brine the fish with salt and sugar, then rinse and dry thoroughly before smoking it. The result is silky, rich hot-smoked salmon that\u0027s even better than store-bought.",
         "Ingredients":  [
                             {
@@ -4433,7 +4450,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Comments - Favorite Paris Restaurants",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -4447,7 +4464,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Labneh with Fresh Vegetables",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "You should use full-fat yogurt for best results. Not sure how lowfat would work, but this is pretty healthy as is and a little goes a long way – if you can resist it! If you want your labneh very thick, you can drain it for up to 24 hours. But I like it a bit soft and velvety. Finely diced celery, carrots, radishes, celery, kohlrabi or any firm-textured vegetable would work. Just beware that if you add red radishes and plan to keep it for any length of time, you’ll find that the skins will tint the labneh a soft, rosy hue like mine did here.\r\n\r\nIf you wish to swap out other vegetables, use about 1/2 cup (75g) of chopped vegetables, total. You can also make a half recipe, although it keeps for a few days in the refrigerator and it’s nice to have something to dip into. It also makes an excellent sandwich spread, with sliced vegetables, hard-cooked eggs, or whatever else you like on sandwiches. I added za’atar and an extra pinch of sumac. You can find them in Middle Eastern markets, online, or make za’atar yourself.",
         "Ingredients":  [
                             {
@@ -4488,7 +4505,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Peach-and-Fennel Slaw",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This sweet and crunchy salad with lots of immune-boosting vitamin C is delicious with grilled pork or in a pulled-pork sandwich. To wilt the fennel s...",
         "Ingredients":  [
                             {
@@ -4533,7 +4550,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "The Low ABV Australian Drink I Can\u0026#x27;t Get Enough Of | The Kitchn",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -4547,7 +4564,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Flâneries in Paris: Explore the Old Temple District in the Marais | Bonjour Paris",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -4561,7 +4578,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Coup de Chance: Woody Allen à la Française | Bonjour Paris",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -4575,7 +4592,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Lovely Lemon Cake",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -4589,7 +4606,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Hupnos | Sous Le Vegetal | MYSA Natural Wine",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -4603,7 +4620,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Cassoulet (Tarbais) Bean\n    \n    \n    \n      \u0026ndash; Rancho Gordo",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -4617,7 +4634,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Penicillin (Non-Alcoholic Cocktail Recipe)",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
                             {
@@ -4658,7 +4675,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Beet Tartare with Dijon and Capers",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "The sweetness of this tartare recipe\u0027s roasted beets mingles with the sharpness of the red onion and scallion while the capers add a pop of tang and salt.",
         "Ingredients":  [
                             {
@@ -4711,7 +4728,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Hazelnut Buttercream",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This silky buttercream frosting is made with hazelnut paste. For a fun variation, try it with white or dark chocolate.",
         "Ingredients":  [
                             {
@@ -4748,7 +4765,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Earl Grey Tea and Tonic",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Don\u0027t drink or trying to drink less? A rich tea syrup is a great way to add flavor and body to a non-alcoholic drink, like in this citrusy Earl Grey Tea and Tonic mocktail.",
         "Ingredients":  [
                             {
@@ -4797,7 +4814,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Coconut and Cardamom Cake",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Aromatic and flavorful, this tender butter cake features both coconut and cardamom for a floral, tropical take on classic yellow cake.",
         "Ingredients":  [
                             {
@@ -4878,7 +4895,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Sourdough Coffee Cake",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This quick coffeecake is a great way to use sourdough starter. Flour, sugar, and eggs along with a little cinnamon and cardamom go well with sourdough.",
         "Ingredients":  [
                             {
@@ -4955,7 +4972,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Goat Cheese Cake with Mixed Berries",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Goat cheese gives a twist to traditional cheesecake and adds a savory element to this not-too-sweet dessert.Beautiful Desserts...",
         "Ingredients":  [
                             {
@@ -5004,7 +5021,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Rotisserie d\u0026#039;Argent Paris Bistro",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -5018,7 +5035,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Best Champs Élysées Recipe: How to Make the Cognac Sour With Chartreuse",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -5032,7 +5049,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "SELLAE : Le nouveau restaurant du Chef Thibault Sombardier à Paris",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -5046,7 +5063,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Fig \u0026amp; Blue Cheese Savories",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "These delicate, crumbly little thumbprints are the perfect combination of sweet \u0026amp; savory: Fig \u0026amp; Blue Cheese. Try this Savories recipe at your next dinner party.",
         "Ingredients":  [
                             {
@@ -5079,7 +5096,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Introducing the Substack app",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -5093,7 +5110,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "An Homage to Notre\u0026#x2d;Dame Cathedral in Paris | Bonjour Paris",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -5107,7 +5124,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Cidres de Normandie Bio - Acheter du Cidre en ligne | Cidrerie Hérout",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -5121,7 +5138,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Bistrot des Tournelles / Bistrot / Paris",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -5135,7 +5152,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Part-Time Lover Cocktail",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Meet your new favorite 4-ingredient tequila cocktail.",
         "Ingredients":  [
                             {
@@ -5176,7 +5193,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Bee Sting Cake",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Between the pillowy cake, fluffy filling, and golden halo of crunchy almonds, it’s heaven in a cake.",
         "Ingredients":  [
                             {
@@ -5293,7 +5310,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Almond, Elderflower and Lime Travel Cakes",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Inspired by French travel cakes (small sweets meant for bringing to parties, picnics and other events), William Werner created these miniature dessert...",
         "Ingredients":  [
                             {
@@ -5350,7 +5367,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Devil’s Food Cake",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "There’s a certain amount of discussion about when to use natural vs Dutch-process cocoa powder, which I explain in my chocolate book, if you’re interested in the details, but I’ve made this cake with both kinds of cocoa powder and no one’s refused a slice cake made with either.\r\n\r\nI make the frosting with water, since I think the cake is plenty rich as it is. But if you want a creamier frosting, using cream in place of the water.",
         "Ingredients":  [
                             {
@@ -5415,7 +5432,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "World Peace Cookies 2.0",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "\u003cp\u003eWe’re delighted to share Dorie Greenspan’s upgraded recipe of her famous World Peace Cookies. Here\u0027s Dorie’s explanation of how this new version of her iconic cookie came to be: \u003cem\u003e“Charlotte Druckman asked if I’d rethink the cookie for her book, Women on Food, and so I thought about the qualities that I admire in women, looked for ingredients that would highlight them and mixed them into the cookie. I added rye flour for groundedness; cocoa nibs to represent strength; pepper for a touch of unpredictability; and raspberries for sharpness and verve. The raspberries are freeze-dried and their flavor takes a little time to reveal itself.”\u003c/em\u003e  Thank you, Dorie, for sharing this recipe with us and the world!\u003c/p\u003e",
         "Ingredients":  [
                             {
@@ -5484,7 +5501,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Lemongrass Jelly",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Citrusy and fresh agar-agar dessert using lemongrass. Delicious as is, or when paired with ginger and palm sugar syrup. Vegan friendly and gluten-free.",
         "Ingredients":  [
                             {
@@ -5537,7 +5554,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Spinach and Feta Bourekas",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Store-bought puff pastry makes these as easy as they are delicious (and they’re very delicious).",
         "Ingredients":  [
                             {
@@ -5594,7 +5611,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Paris Eating \u0026 Drinking | David Lebovitz Newsletter | Substack",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -5608,7 +5625,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Restaurant Paris - Bouillon République",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -5622,7 +5639,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Confit Tandoori Chickpeas",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "These confit tandoori chickpeas get slow-cooked with aromatics in oil and only get better with time for a sublime make-ahead meal.",
         "Ingredients":  [
                             {
@@ -5707,7 +5724,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "L’Adresse – Paris \u0026#8211; Fulgurances",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -5721,7 +5738,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Mushroom Custard",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "I love custards—when they are properly baked, that is, so each spoonful feels like velvet and truly melts on the tongue, releasing all its flavors. This is one of the most basic pleasures of eating, one that my family enjoys and that I want to share with you. Here is a custard that has everything: lots of the flavor of fresh mushrooms, dried porcini, sage, garlic, and leeks, all concentrated and deepened in the skillet, and a creamy custard that holds all these flavors in suspension. When a spoonful of this melts on your tongue, you’ll understand why I love custards. Serve it as a first course at a special dinner, or as the centerpiece of a holiday brunch. This recipe is for eight small custards and is easily multiplied to make more. The recipe details the important steps in making any custard, so, if you haven’t made one particularly successfully before, pay special attention. For uniform baking, I recommend that you use identical molds to bake up a batch, if possible. If you don’t have any, I encourage you to buy a set of inexpensive 1/2-cup ceramic molds—get eight or a dozen; either a small shallow soufflé shape or the taller traditional custard cup is fine. You’ll use them forever, I hope.",
         "Ingredients":  [
                             {
@@ -5790,7 +5807,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Septime restaurant in Paris",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -5804,7 +5821,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Ionesco at the Latin Quarter\u0026#8217;s Theatre de la Huchette | Bonjour Paris",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -5818,7 +5835,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Goat Milk–and–Corn Panna Cotta with Blackberries",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Food \u0026 Wine’s Goat Milk–and–Corn Panna Cotta with Blackberries is the perfect summer dessert.",
         "Ingredients":  [
                             {
@@ -5883,7 +5900,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Savory Bread Pudding",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This Savory Bread Pudding recipe is the perfect Thanksgiving dish.",
         "Ingredients":  [
                             {
@@ -5952,7 +5969,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Green Tea Hugo Spritz",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "The Green Tea Hugo Spritz is a simple riff on a classic Hugo Spritz that combines iced green tea, elderflower liqueur, and Prosecco to yield a delightfully floral, citrusy, and herbaceous cocktail.",
         "Ingredients":  [
                             {
@@ -5985,7 +6002,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "David Lebovitz Newsletter | Substack",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -5999,7 +6016,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Brown Sugar Cake with Ricotta and Blueberries",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This simple brown sugar cake from Top Chef winner Joe Flamm is dense and chewy, like a cross between a cake and a blondie-and is super easy to make. Get the recipe at Food \u0026 Wine.",
         "Ingredients":  [
                             {
@@ -6044,7 +6061,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "A Recipe for Honeynut Dream Cake - Eater",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -6058,7 +6075,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Google Maps",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -6072,7 +6089,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Tomato Salad With Smoky Eggplant Flatbread",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Buy lavash or pita at a local Middle Eastern market, heat the flatbreads in a skillet or toaster oven, and smear them with this delicious eggplant spread, enriched with spices and tahini and pleasantly smoky from a cook over an open flame. Serve the flatbreads with this Turkish-style tomato salad, a variation on one I learned in Istanbul from the Turkish chef Gamze Ineceli. Hers is more traditional — finely chopped tomato is customary — but you can also choose the colorful cherry tomatoes at the market and cut them in halves or quarters.",
         "Ingredients":  [
                             {
@@ -6161,7 +6178,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Buckwheat Blini Recipe",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Most buckwheat blini recipes call for yeast and long rising times, and they take hours to make. Our version delivers great buckwheat flavor, and the batter comes together in a snap.",
         "Ingredients":  [
                             {
@@ -6226,7 +6243,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Black Sesame Otsu",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "The Black Sesame Otsu recipe from Super Natural Every Day - soba noodles and tofu slathered in a thinned-out, salty-sweet black sesame paste, then topped with lots of sliced green onions.",
         "Ingredients":  [
 
@@ -6240,7 +6257,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Warm Strawberry Crumb Cake",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Gerard Craft tops spring\u0027s first strawberries with batter and bakes them until the fruit is warm and jammy and the cake is airy, with a wonderful, cri...",
         "Ingredients":  [
                             {
@@ -6321,7 +6338,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Chocolate Panna Cotta with Spiced Pepita Brittle",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This light, silky panna cotta tastes a lot like hot cocoa in custard form. The brittle is easy to make; heat sugar and water on the stove, swirl in butter and spiced pepitas (shelled pumpkin seeds), then let cool. More Great Chocolate Desserts",
         "Ingredients":  [
                             {
@@ -6374,7 +6391,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "David Lebovitz | Substack",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -6388,7 +6405,7 @@
     {
         "Chef":  "Deborah",
         "Title":  ". x X    Clamato    X x .",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -6402,7 +6419,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Acorn Squash with Coconut Custard",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Upgrade roasted acorn squash with a filling of decadent coconut custard. Get the recipe at Food \u0026 Wine.",
         "Ingredients":  [
                             {
@@ -6467,7 +6484,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Cheesy Skillet Kimchi Potatoes",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Whether eaten from a bowl or wrapped as a burrito, this hearty potato dish is an all-around satisfying meal.",
         "Ingredients":  [
                             {
@@ -6528,7 +6545,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Citrus-Chile Blender Marinade",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This easy marinade is made with orange and lime juices, canned chipotle peppers, onion, and garlic.",
         "Ingredients":  [
                             {
@@ -6573,7 +6590,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Rosé Shrimp",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This zippy, pink shrimp dish captures the crisp and flowery flavors of rosé wine in just 20 minutes. A dusting of herbes de Provence, bloomed in hot, shrimpy olive oil, amplifies the savoriness that crustaceans cooked in butter and wine tend to provide, like that of \u003ca href=\"https://cooking.nytimes.com/recipes/9101-classic-shrimp-scampi\"\u003eshrimp scampi\u003c/a\u003e. Piment d’Espelette — the fruity, moderately spiced pepper named after a commune in France and prevalent in Basque cooking — turbocharges the color and flavor of the shrimp. This chile can be swapped in a pinch (see Tip), but don’t skip the orange zest; it brings out the wine’s inherent fruitiness. Serve this dish as an appetizer with crusty bread, or as an entrée with pasta or white rice, whatever can sop up the rosy pan juices.",
         "Ingredients":  [
                             {
@@ -6622,7 +6639,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "New York City and state fight over foie gras ban | New York | The Guardian",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -6636,7 +6653,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "White Negroni Recipe",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "The White Negroni has been a trendy drink lately, showing up on cocktail menus across the country.",
         "Ingredients":  [
                             {
@@ -6665,7 +6682,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Épicerie Sabah - Épicerie fine en ligne, Épicerie du Monde",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -6679,7 +6696,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Basil Vinaigrette",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This especially lively vinaigrette is perfect with tomatoes, but also could go with a variety of other things – spooned over burrata, fresh mozzarella, or feta cheese. It could also accompany grilled vegetables, fish, pork, shrimp, or chicken, or you could spoon a little over white bean dip or labneh just before serving. Toss it with pasta? Why not?\r\n\r\nIf you want to include fresh shelling beans with your tomatoes and burrata, as I did, they are easy to prepare. Shuck the beans and bring a pot of lightly salted water to a boil. Add the beans and cook at a low boil for 20 to 25 minutes, until the beans are tender. Drain well, the toss in bowl with a generous pour of olive oil – enough so they are well-covered, and season with salt. You can add chopped basil to them if you wish, although the sauce provides plenty of basil flavor.",
         "Ingredients":  [
                             {
@@ -6720,7 +6737,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Green Bay Bloody Mary",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "When we opened Bar Sardine in the summer of 2014, we wanted an all-day Bloody Mary on the menu, and call me Dr. Seuss, but I couldn’t stop thinking about green green green Bloodys. Tomatillos can be a little fussy with size and consistency, and in the winter, they tend to grow sour after sitting for a day or two. But when they behave, wow. High-five somebody.",
         "Ingredients":  [
                             {
@@ -6785,7 +6802,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Emily Monaco | Bonjour Paris",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -6799,7 +6816,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Devil\u0027s Food Snacking Cake",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "At NYC\u0027s Mah-Ze-Dahr Bakery, Umber Ahmad and Shelly Acuna Barbera make one of the most perfect chocolate cakes ever: It\u0027s rich, moist and not too sweet, with a deeply chocolaty whipped ganache frosting. Slideshow: More Cake Recipes",
         "Ingredients":  [
                             {
@@ -6876,7 +6893,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Instagram",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -6890,7 +6907,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Accueil - Le clarence | Le clarence",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -6904,7 +6921,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Bistrot des Tournelles / Bistrot / Paris",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -6918,7 +6935,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "The 13 Best Bistros in Paris | Bonjour Paris",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -6932,7 +6949,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Podcast: A Chat with Deb Perelman of Smitten Kitchen",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -6946,7 +6963,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Fig and Blue Cheese Savouries",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Delicate, crumbly little thumbprints that are the perfect combination of sweet and savory—a cheese plate wrapped into one crunchy little morsel.",
         "Ingredients":  [
                             {
@@ -6979,7 +6996,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Thai Tea Spritz",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "A bubbly, bright take on a classic Thai iced tea.",
         "Ingredients":  [
                             {
@@ -7032,7 +7049,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "my favorite Paris Restaurants - David Lebovitz",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -7046,7 +7063,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Lust for Life Mezcal Cocktail",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -7060,7 +7077,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "David Lebovitz | Substack",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -7074,7 +7091,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Penang Beef Curry",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This delicious curry features hanger steak cubes simmered in a fragrant coconut curry sauce made with spicy Penang curry paste, coconut milk and lime juice.",
         "Ingredients":  [
                             {
@@ -7167,7 +7184,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Oven-Roasted Chicken Shawarma",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Here is a recipe for an oven-roasted version of the classic street-side flavor bomb usually cooked on a rotisserie. It is perfect for an evening with family and friends. Serve with pita and tahini, chopped cucumbers and tomatoes, some olives, chopped parsley, some feta, fried eggplant, hummus swirled with harissa, rice or rice pilaf. You can make the white sauce that traditionally accompanies it by cutting plain yogurt with mayonnaise and lemon juice, and flecking it with garlic. For a red to offset it, simmer ketchup with red pepper flakes and a hit of red-wine vinegar until it goes syrupy and thick, or just use your favorite hot sauce instead.",
         "Ingredients":  [
                             {
@@ -7232,7 +7249,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Double Dark Chocolate No-Churn Ice Cream",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "This fuss-free ice cream doubles down on the chocolate flavor with a rich dark cocoa base and a glossy fudge ripple—no churning required.",
         "Ingredients":  [
                             {
@@ -7289,7 +7306,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "SELLAE : Le nouveau restaurant du Chef Thibault Sombardier à Paris",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -7303,7 +7320,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Almond Semifreddo with Caramelized Apples",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Chef Tom Colicchio, the head judge of Bravo\u0027s Top Chef, has made his restaurant Craft into a huge brand, which has helped his colleagues share in the limelight. Karen DeMasco, who cowrote The Craft of Baking with cookbook author Mindy Fox, is the former pastry chef at Craft and is known for recipes that are classically elegant yet approachable, like this supercreamy almond semifreddo (\"half-frozen\") topped with warm caramelized apples.More Easy Desserts",
         "Ingredients":  [
                             {
@@ -7360,7 +7377,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Comice",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -7374,7 +7391,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Strawberries and Cream Semifreddo",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Semifreddo is the easiest, dreamiest frozen summer dessert with no special equipment or fancy ingredients required. Smooth and creamy, this recipe pairs fresh strawberry compote with a light-as-air vanilla semifreddo.",
         "Ingredients":  [
                             {
@@ -7443,7 +7460,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "PARCELLES / Bistrot / Paris",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -7457,7 +7474,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Favorite Paris Restaurants - David Lebovitz Newsletter",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -7471,7 +7488,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Cucumber Salad with Thai Chiles and Peanuts",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "In this refreshing salad recipe, crisp cucumbers and cilantro are tossed with a tangy dressing made from lime juice, fish sauce, and fiery Thai chiles.",
         "Ingredients":  [
                             {
@@ -7528,7 +7545,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Domaine de la Tournelle - Évelyne et Pascal Clairet - Vins du Jura à Arbois",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "",
         "Ingredients":  [
 
@@ -7542,7 +7559,7 @@
     {
         "Chef":  "Deborah",
         "Title":  "Smoked Salmon Crisps",
-        "Category":  "Possible Recipies",
+        "Category":  "Possible Recipes",
         "Description":  "Chef Way Thomas Keller\u0027s salmon cornets (tuiles shaped into tiny cones and topped with crème fraîche and fresh salmon) are a famous kickoff to his lux...",
         "Ingredients":  [
                             {
@@ -19212,6 +19229,16 @@
                 customMealInput.required = false;
                 customMealInput.value = '';
             }
+            const customCategoryInput = document.getElementById('form-custom-category');
+            if (customCategoryInput) {
+                customCategoryInput.style.display = 'none';
+                customCategoryInput.required = false;
+                customCategoryInput.value = '';
+            }
+            const descTextarea = document.getElementById('form-description');
+            if (descTextarea) {
+                descTextarea.style.height = 'auto';
+            }
         } else if (id === 'event-form-modal-overlay') {
             elements.eventForm.reset();
             elements.eventItemsList.innerHTML = '';
@@ -19278,6 +19305,18 @@
     }
 
     function combineAndRenderRecipes() {
+        // Fix spelling for preloaded recipes category at runtime
+        PRELOADED_RECIPES.forEach(r => {
+            if (r.Category === 'Possible Recipes') r.Category = 'Possible Recipes';
+            if (r.category === 'Possible Recipes') r.category = 'Possible Recipes';
+        });
+
+        // Fix spelling for custom recipes category at runtime
+        customRecipes.forEach(r => {
+            if (r.Category === 'Possible Recipes') r.Category = 'Possible Recipes';
+            if (r.category === 'Possible Recipes') r.category = 'Possible Recipes';
+        });
+
         // Combine preloaded and custom (filtering out deleted preloaded ones)
         let allRecipes = PRELOADED_RECIPES.filter(r => {
             const title = (r.Title || r.title || '').trim().toLowerCase();
@@ -19341,7 +19380,7 @@
             });
         }
         
-        const categories = new Set(["Possible Recipies"]);
+        const categories = new Set(["Possible Recipes"]);
         const mealTypes = new Set(["Breakfast", "Lunch", "Dinner", "Brunch", "Dinner Party", "Cocktail Party"]);
         
         recipes.forEach(r => {
@@ -19604,7 +19643,22 @@
         elements.formModalTitle.textContent = "Edit Recipe";
         elements.formTitle.value = recipe.Title || recipe.title || '';
         elements.formChef.value = recipe.Chef || recipe.chef || currentChef;
-        elements.formCategory.value = recipe.Category || recipe.category || 'Appetizer';
+
+        // Handle custom category input visibility
+        const standardCategories = ['Appetizer', 'Breads', 'Breakfast', 'Desserts', 'Drinks', 'Grains', 'Jams', 'Meats', 'Pasta', 'Possible Recipes', 'Poultry', 'Salad', 'Sandwiches', 'Sauces', 'Seafood', 'Soups', 'Vegetables'];
+        const formCustomCategoryInput = document.getElementById('form-custom-category');
+        const recipeCat = recipe.Category || recipe.category || 'Appetizer';
+        if (recipeCat && !standardCategories.includes(recipeCat)) {
+            elements.formCategory.value = 'custom';
+            formCustomCategoryInput.value = recipeCat;
+            formCustomCategoryInput.style.display = 'block';
+            formCustomCategoryInput.required = true;
+        } else {
+            elements.formCategory.value = recipeCat;
+            formCustomCategoryInput.style.display = 'none';
+            formCustomCategoryInput.required = false;
+            formCustomCategoryInput.value = '';
+        }
         
         // Handle custom meal type input visibility
         const formCustomMealTypeInput = document.getElementById('form-custom-mealtype');
@@ -19652,6 +19706,14 @@
 
         closeModal('detail-modal-overlay');
         showModal('form-modal-overlay');
+        
+        setTimeout(() => {
+            const descTextarea = document.getElementById('form-description');
+            if (descTextarea) {
+                descTextarea.style.height = 'auto';
+                descTextarea.style.height = descTextarea.scrollHeight + 'px';
+            }
+        }, 50);
     }
 
     // Dynamic Form Builders
@@ -19873,6 +19935,12 @@
             elements.formInstructionsList.innerHTML = '';
             addInstructionStep();
 
+            // Reset description box height
+            const descTextarea = document.getElementById('form-description');
+            if (descTextarea) {
+                descTextarea.style.height = 'auto';
+            }
+
             showModal('form-modal-overlay');
         });
 
@@ -19893,6 +19961,29 @@
                 formCustomMealTypeInput.required = false;
             }
         });
+
+        // Custom Category logic
+        const formCategorySelect = document.getElementById('form-category');
+        const formCustomCategoryInput = document.getElementById('form-custom-category');
+        formCategorySelect.addEventListener('change', () => {
+            if (formCategorySelect.value === 'custom') {
+                formCustomCategoryInput.style.display = 'block';
+                formCustomCategoryInput.required = true;
+                formCustomCategoryInput.focus();
+            } else {
+                formCustomCategoryInput.style.display = 'none';
+                formCustomCategoryInput.required = false;
+            }
+        });
+
+        // Auto-expanding description box
+        const descTextarea = document.getElementById('form-description');
+        if (descTextarea) {
+            descTextarea.addEventListener('input', () => {
+                descTextarea.style.height = 'auto';
+                descTextarea.style.height = descTextarea.scrollHeight + 'px';
+            });
+        }
 
 
 
@@ -19950,12 +20041,15 @@
             const mealTypeSelectVal = elements.formMealType.value;
             const mealTypeVal = mealTypeSelectVal === 'custom' ? document.getElementById('form-custom-mealtype').value.trim() : mealTypeSelectVal;
 
+            const categorySelectVal = elements.formCategory.value;
+            const categoryVal = categorySelectVal === 'custom' ? document.getElementById('form-custom-category').value.trim() : categorySelectVal;
+
             const savedPhoto = selectedFormPhoto || (editingRecipe ? editingRecipe.photo : "") || "";
 
             const updatedRecipe = {
                 Title: title,
                 Chef: elements.formChef.value || currentChef,
-                Category: elements.formCategory.value,
+                Category: categoryVal,
                 mealType: mealTypeVal,
                 Servings: elements.formServings.value.trim(),
                 Description: elements.formDescription.value.trim(),

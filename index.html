@@ -832,11 +832,13 @@
             border: 1px solid var(--border-color);
         }
 
-        #form-description {
+        textarea.form-control {
             resize: none;
             overflow-y: hidden;
             min-height: 80px;
             transition: none;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
 
         .form-actions-footer {
@@ -19235,13 +19237,15 @@
                 customCategoryInput.required = false;
                 customCategoryInput.value = '';
             }
-            const descTextarea = document.getElementById('form-description');
-            if (descTextarea) {
-                descTextarea.style.height = 'auto';
-            }
+            document.querySelectorAll('textarea.form-control').forEach(textarea => {
+                textarea.style.height = 'auto';
+            });
         } else if (id === 'event-form-modal-overlay') {
             elements.eventForm.reset();
             elements.eventItemsList.innerHTML = '';
+            document.querySelectorAll('textarea.form-control').forEach(textarea => {
+                textarea.style.height = 'auto';
+            });
         }
     }
 
@@ -19708,11 +19712,7 @@
         showModal('form-modal-overlay');
         
         setTimeout(() => {
-            const descTextarea = document.getElementById('form-description');
-            if (descTextarea) {
-                descTextarea.style.height = 'auto';
-                descTextarea.style.height = descTextarea.scrollHeight + 'px';
-            }
+            if (window.adjustAllTextareaHeights) window.adjustAllTextareaHeights();
         }, 50);
     }
 
@@ -19935,11 +19935,10 @@
             elements.formInstructionsList.innerHTML = '';
             addInstructionStep();
 
-            // Reset description box height
-            const descTextarea = document.getElementById('form-description');
-            if (descTextarea) {
-                descTextarea.style.height = 'auto';
-            }
+            // Reset all textarea heights
+            document.querySelectorAll('textarea.form-control').forEach(textarea => {
+                textarea.style.height = 'auto';
+            });
 
             showModal('form-modal-overlay');
         });
@@ -19976,14 +19975,21 @@
             }
         });
 
-        // Auto-expanding description box
-        const descTextarea = document.getElementById('form-description');
-        if (descTextarea) {
-            descTextarea.addEventListener('input', () => {
-                descTextarea.style.height = 'auto';
-                descTextarea.style.height = descTextarea.scrollHeight + 'px';
+        // Auto-expanding for all textareas
+        const adjustAllTextareaHeights = () => {
+            document.querySelectorAll('textarea.form-control').forEach(textarea => {
+                textarea.style.height = 'auto';
+                textarea.style.height = textarea.scrollHeight + 'px';
             });
-        }
+        };
+        window.adjustAllTextareaHeights = adjustAllTextareaHeights;
+
+        document.querySelectorAll('textarea.form-control').forEach(textarea => {
+            textarea.addEventListener('input', () => {
+                textarea.style.height = 'auto';
+                textarea.style.height = textarea.scrollHeight + 'px';
+            });
+        });
 
 
 
@@ -20175,6 +20181,11 @@
             for (let i = 0; i < 3; i++) {
                 addEventItemRow();
             }
+
+            // Reset all textarea heights
+            document.querySelectorAll('textarea.form-control').forEach(textarea => {
+                textarea.style.height = 'auto';
+            });
 
             showModal('event-form-modal-overlay');
         };
@@ -20607,6 +20618,10 @@
         
         closeModal('event-detail-modal-overlay');
         showModal('event-form-modal-overlay');
+        
+        setTimeout(() => {
+            if (window.adjustAllTextareaHeights) window.adjustAllTextareaHeights();
+        }, 50);
     }
 
     // Open Event Detail view

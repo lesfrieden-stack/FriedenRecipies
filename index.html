@@ -841,6 +841,12 @@
             word-wrap: break-word;
         }
 
+        textarea.inst-step, textarea.ing-n1, textarea.ing-n2 {
+            min-height: 36px !important;
+            padding: 0.4rem 0.6rem;
+            line-height: 1.4;
+        }
+
         .form-actions-footer {
             padding: 1.5rem 2rem;
             border-top: 1px solid var(--border-color);
@@ -19721,11 +19727,20 @@
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td><input type="text" class="form-control ing-q1" value="${q1}" placeholder="e.g. 1 Tbsp."></td>
-            <td><input type="text" class="form-control ing-n1" value="${n1}" placeholder="e.g. Olive oil"></td>
+            <td><textarea class="form-control ing-n1" placeholder="e.g. Olive oil">${n1}</textarea></td>
             <td><input type="text" class="form-control ing-q2" value="${q2}" placeholder="e.g. 2"></td>
-            <td><input type="text" class="form-control ing-n2" value="${n2}" placeholder="e.g. Garlic cloves"></td>
+            <td><textarea class="form-control ing-n2" placeholder="e.g. Garlic cloves">${n2}</textarea></td>
             <td style="text-align: center;"><button type="button" class="remove-row-btn" onclick="this.closest('tr').remove()">🗑️</button></td>
         `;
+        
+        // Attach auto-expand behavior to these new textareas on input
+        tr.querySelectorAll('textarea.form-control').forEach(textarea => {
+            textarea.addEventListener('input', () => {
+                textarea.style.height = 'auto';
+                textarea.style.height = textarea.scrollHeight + 'px';
+            });
+        });
+        
         elements.formIngredientsTbody.appendChild(tr);
     }
 
@@ -19735,9 +19750,16 @@
         div.className = 'instruction-input-row';
         div.innerHTML = `
             <span>${stepNum}</span>
-            <input type="text" class="form-control inst-step" value="${stepText}" placeholder="e.g. Whisk together dry ingredients" required>
+            <textarea class="form-control inst-step" placeholder="e.g. Whisk together dry ingredients" required>${stepText}</textarea>
             <button type="button" class="remove-row-btn" onclick="this.parentElement.remove(); renumberInstructionSteps();">🗑️</button>
         `;
+        
+        const textarea = div.querySelector('textarea');
+        textarea.addEventListener('input', () => {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        });
+        
         elements.formInstructionsList.appendChild(div);
     }
 

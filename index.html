@@ -841,10 +841,24 @@
             word-wrap: break-word;
         }
 
-        textarea.inst-step, textarea.ing-n1, textarea.ing-n2 {
+        textarea.inst-step,
+        textarea.ing-n1,
+        textarea.ing-n2,
+        textarea.ing-q1,
+        textarea.ing-q2,
+        textarea.event-item-name-input,
+        #form-title,
+        #form-servings,
+        #form-custom-category,
+        #form-custom-mealtype,
+        #event-form-title,
+        #search-input,
+        #login-new-chef,
+        #form-chef {
             min-height: 36px !important;
             padding: 0.4rem 0.6rem;
             line-height: 1.4;
+            height: auto;
         }
 
         .form-actions-footer {
@@ -1306,7 +1320,7 @@
         <section class="filter-panel">
             <div class="form-group">
                 <label for="search-input">Search Recipes</label>
-                <input type="text" id="search-input" class="form-control" placeholder="Search by name, ingredient, description...">
+                <textarea id="search-input" class="form-control" placeholder="Search by name, ingredient, description..." rows="1"></textarea>
             </div>
             <div class="form-group">
                 <label for="chef-filter">Filter by Chef</label>
@@ -1389,7 +1403,7 @@
             <div class="chef-or-divider">Or</div>
             <div class="form-group" style="text-align: left;">
                 <label for="login-new-chef">Enter Your Name</label>
-                <input type="text" id="login-new-chef" class="form-control" placeholder="New Chef Name" autocomplete="off">
+                <textarea id="login-new-chef" class="form-control" placeholder="New Chef Name" rows="1" autocomplete="off"></textarea>
             </div>
             <button type="submit" class="btn" style="margin-top: 1rem; justify-content: center;">Start Cooking</button>
         </form>
@@ -1455,11 +1469,11 @@
             <div class="recipe-form-body">
                 <div class="form-group">
                     <label for="form-title">Recipe Title *</label>
-                    <input type="text" id="form-title" class="form-control" required placeholder="e.g. My Favorite Pasta">
+                    <textarea id="form-title" class="form-control" required placeholder="e.g. My Favorite Pasta" rows="1"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="form-chef">Chef *</label>
-                    <input type="text" id="form-chef" class="form-control" readonly required>
+                    <textarea id="form-chef" class="form-control" readonly required rows="1"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="form-category">Category *</label>
@@ -1483,7 +1497,7 @@
                         <option value="Vegetables">Vegetables</option>
                         <option value="custom">＋ Add Custom Category...</option>
                     </select>
-                    <input type="text" id="form-custom-category" class="form-control" placeholder="Enter Custom Category" style="display: none; margin-top: 0.5rem;">
+                    <textarea id="form-custom-category" class="form-control" placeholder="Enter Custom Category" style="display: none; margin-top: 0.5rem;" rows="1"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="form-mealtype">Meal Type *</label>
@@ -1496,11 +1510,11 @@
                         <option value="Cocktail Party">Cocktail Party</option>
                         <option value="custom">＋ Add Custom Meal Type...</option>
                     </select>
-                    <input type="text" id="form-custom-mealtype" class="form-control" placeholder="Enter Custom Meal Type" style="display: none; margin-top: 0.5rem;">
+                    <textarea id="form-custom-mealtype" class="form-control" placeholder="Enter Custom Meal Type" style="display: none; margin-top: 0.5rem;" rows="1"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="form-servings">Servings</label>
-                    <input type="text" id="form-servings" class="form-control" placeholder="e.g. 4-6 servings, 2 cups">
+                    <textarea id="form-servings" class="form-control" placeholder="e.g. 4-6 servings, 2 cups" rows="1"></textarea>
                 </div>
 
                 
@@ -1563,7 +1577,7 @@
             <div class="recipe-form-body">
                 <div class="form-group">
                     <label for="event-form-title">Event Title *</label>
-                    <input type="text" id="event-form-title" class="form-control" required placeholder="e.g. Summer Solstice Gathering">
+                    <textarea id="event-form-title" class="form-control" required placeholder="e.g. Summer Solstice Gathering" rows="1"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="event-form-chef">Organizer *</label>
@@ -19221,6 +19235,9 @@
 
     function showModal(id) {
         document.getElementById(id).classList.add('active');
+        setTimeout(() => {
+            if (window.adjustAllTextareaHeights) window.adjustAllTextareaHeights();
+        }, 50);
     }
 
     function closeModal(id) {
@@ -19726,9 +19743,9 @@
     function addIngredientRow(q1 = '', n1 = '', q2 = '', n2 = '') {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td><input type="text" class="form-control ing-q1" value="${q1}" placeholder="e.g. 1 Tbsp."></td>
+            <td><textarea class="form-control ing-q1" placeholder="e.g. 1 Tbsp.">${q1}</textarea></td>
             <td><textarea class="form-control ing-n1" placeholder="e.g. Olive oil">${n1}</textarea></td>
-            <td><input type="text" class="form-control ing-q2" value="${q2}" placeholder="e.g. 2"></td>
+            <td><textarea class="form-control ing-q2" placeholder="e.g. 2">${q2}</textarea></td>
             <td><textarea class="form-control ing-n2" placeholder="e.g. Garlic cloves">${n2}</textarea></td>
             <td style="text-align: center;"><button type="button" class="remove-row-btn" onclick="this.closest('tr').remove()">🗑️</button></td>
         `;
@@ -20327,6 +20344,21 @@
         // Check if there is a shared recipe/event in the hash on load
         handleUrlHashImport();
         window.addEventListener('hashchange', handleUrlHashImport);
+        window.addEventListener('resize', () => {
+            if (window.adjustAllTextareaHeights) window.adjustAllTextareaHeights();
+        });
+
+        // Submit login on Enter press in chef name textarea
+        if (elements.loginNewChef) {
+            elements.loginNewChef.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    if (elements.loginForm) {
+                        elements.loginForm.requestSubmit();
+                    }
+                }
+            });
+        }
     }
 
     // URL Import Logic
@@ -20493,7 +20525,7 @@
                 <option value="Wine" ${type === 'Wine' ? 'selected' : ''}>Wine</option>
                 <option value="Other" ${type === 'Other' ? 'selected' : ''}>Other</option>
             </select>
-            <input type="text" class="form-control event-item-name-input" value="${name}" list="recipes-datalist" placeholder="Item Name (e.g. Pasta, Pinot Noir)...">
+            <textarea class="form-control event-item-name-input" list="recipes-datalist" placeholder="Item Name (e.g. Pasta, Pinot Noir)...">${name}</textarea>
             
             <input type="file" id="${fileInputId}" accept="image/*" style="display: none;">
             <div class="event-item-thumbnail ${photo ? 'has-photo' : ''}" style="${photo ? `background-image: url(${photo})` : ''}" title="Double-click to expand, Click to upload photo">
@@ -20509,6 +20541,12 @@
             thumbnail.dataset.photo = photo;
         }
         
+        const textarea = row.querySelector('.event-item-name-input');
+        textarea.addEventListener('input', () => {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        });
+
         const fileInput = row.querySelector(`#${fileInputId}`);
         thumbnail.addEventListener('click', (e) => {
             if (e.detail === 1) {
